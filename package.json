@@ -1,0 +1,33 @@
+{
+  "name": "webapi-ii-guided-project",
+  "version": "1.0.0",
+  "description": "Guided project for **Web API II** Module",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LambdaSchool/webapi-ii-guided.git"
+  },
+  "keywords": [
+    "backend",
+    "guided",
+    "chat",
+    "lambda",
+    "api"
+  ],
+  "author": "Lambda School",
+  "bugs": {
+    "url": "https://github.com/LambdaSchool/webapi-ii-guided/issues"
+  },
+  "homepage": "https://github.com/LambdaSchool/webapi-ii-guided#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.18.3",
+    "sqlite3": "^4.0.9"
+  }
+}
