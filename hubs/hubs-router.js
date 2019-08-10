@@ -1,4 +1,10 @@
-server.get('/api/hubs', async (req, res) => {
+const express = require('express');
+
+const Hubs = require('./hubs-model.js');
+
+const router = express.Router();
+
+router.get('/', async (req, res) => {
   try {
     const hubs = await Hubs.find(req.query);
     res.status(200).json(hubs);
@@ -11,7 +17,7 @@ server.get('/api/hubs', async (req, res) => {
   }
 });
 
-server.get('/api/hubs/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const hub = await Hubs.findById(req.params.id);
 
@@ -29,7 +35,7 @@ server.get('/api/hubs/:id', async (req, res) => {
   }
 });
 
-server.post('/api/hubs', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const hub = await Hubs.add(req.body);
     res.status(201).json(hub);
@@ -42,7 +48,7 @@ server.post('/api/hubs', async (req, res) => {
   }
 });
 
-server.delete('/api/hubs/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const count = await Hubs.remove(req.params.id);
     if (count > 0) {
@@ -59,7 +65,7 @@ server.delete('/api/hubs/:id', async (req, res) => {
   }
 });
 
-server.put('/api/hubs/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const hub = await Hubs.update(req.params.id, req.body);
     if (hub) {
@@ -78,3 +84,5 @@ server.put('/api/hubs/:id', async (req, res) => {
 
 // add an endpoint that returns all the messages for a hub
 // add an endpoint for adding new message to a hub
+
+module.exports = router;
