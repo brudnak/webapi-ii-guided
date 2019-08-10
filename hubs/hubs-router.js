@@ -38,7 +38,14 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const hub = await Hubs.add(req.body);
-    res.status(201).json(hub);
+
+    if (hub) {
+      res.status(201).json(hub);
+    } else {
+      res.status(404).json({
+        message: 'Hub not found',
+      });
+    }
   } catch (error) {
     // log error to database
     console.log(error);
@@ -96,5 +103,18 @@ router.get('/:id/messages', async (req, res) => {
 });
 
 // add an endpoint for adding new message to a hub
+router.post('/:id/messages', async (req, res) => {
+  const messageInfo = { ...req.body, hub_id: req.params.id };
+
+  try {
+    const savedMessage = await Hubs.addMessage(messageInfo);
+    res.status(201).json(savedMessage);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Error saving hub message',
+    });
+  }
+});
 
 module.exports = router;
